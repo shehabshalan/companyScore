@@ -1,9 +1,9 @@
-import React from 'react';
-import CompanyScore from './CompanyScore'
+import React from "react";
+import CompanyBasicReport from "./CompanyBasicReport";
 function App() {
   return (
     <div className="App">
-      <CompanyScore/>
+      <CompanyBasicReport />
     </div>
   );
 }

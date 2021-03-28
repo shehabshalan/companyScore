@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     backgroundColor: "#854b44",
     color: "#ffffff",
   },
-  // companyInfo: {
+  // companyData: {
   //   position: "relative",
   //   // left: left,
   //   top: top,
@@ -58,9 +58,9 @@ const useStyles = makeStyles({
     marginTop: 20,
   },
 });
-const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
+const CompanyInformation = ({ companyData }: { companyData: any }) => {
   console.log("yo");
-  // console.log(companyInfo);
+  // console.log(companyData);
   const classes = useStyles();
   return (
     <Box className={classes.companyCard}>
@@ -72,7 +72,7 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
             variant="h2"
             component="h1"
           >
-            {companyInfo.companyName}
+            {companyData.companyName}
           </Typography>
         </Box>
 
@@ -83,19 +83,19 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
           <Grid container direction="row" justify="space-between">
             <Grid item>
               <Typography className={classes.companyType} variant="h6">
-                {companyInfo.type && `${companyInfo.type.toUpperCase()}`}
+                {companyData.type && `${companyData.type.toUpperCase()}`}
               </Typography>
             </Grid>
             <Grid
               item
               className={
-                companyInfo.status === "Active"
+                companyData.status === "Active"
                   ? classes.companyStatusActive
                   : classes.companyStatusDis
               }
             >
               <Typography style={{ fontWeight: "bolder", lineHeight: "30px" }}>
-                {companyInfo.status}
+                {companyData.status}
               </Typography>
             </Grid>
           </Grid>
@@ -113,7 +113,7 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
                   {" "}
                   <BusinessIcon />
                 </Grid>
-                <Grid item>{companyInfo.companyNumber}</Grid>
+                <Grid item>{companyData.companyNumber}</Grid>
               </Grid>
               <Grid item container direction="row" spacing={1}>
                 {" "}
@@ -123,28 +123,28 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
                 </Grid>
                 <Grid
                   item
-                >{`${companyInfo.registeredOfficeAddress}, ${companyInfo.postalCode} `}</Grid>
+                >{`${companyData.registeredOfficeAddress}, ${companyData.postalCode} `}</Grid>
               </Grid>
-              {companyInfo.registeredIn ? (
+              {companyData.registeredIn ? (
                 <Grid item container direction="row" spacing={1}>
                   {" "}
                   <Grid item>
                     {" "}
                     <ReactCountryFlag
-                      countryCode={companyInfo.registeredIn}
+                      countryCode={companyData.registeredIn}
                       svg
                       style={{
                         width: "1.5em",
                         height: "1.5em",
                       }}
-                      title={companyInfo.registeredIn}
+                      title={companyData.registeredIn}
                     />
                   </Grid>
                   <Grid item>
                     <Typography
                       style={{ fontWeight: "bolder", fontSize: "20px" }}
                     >
-                      {companyInfo.registeredIn}
+                      {companyData.registeredIn}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -164,7 +164,7 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
                   {" "}
                   <DateRangeIcon />
                 </Grid>
-                <Grid item>{companyInfo.incorporatedOn}</Grid>
+                <Grid item>{companyData.incorporatedOn}</Grid>
               </Grid>
             </Grid>
             {/* COMPANY INFORMATION --END */}
@@ -180,17 +180,17 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
               md={6}
             >
               <Grid item>{`${
-                companyInfo.hasInsolvencyHistory === true
+                companyData.hasInsolvencyHistory === true
                   ? "Has Insolvency History: YES"
                   : "Has Insolvency History: N/A"
               } `}</Grid>
               <Grid item>{`${
-                companyInfo.hasCharges === true
+                companyData.hasCharges === true
                   ? "Has Charges: YES"
                   : "Has Charges: N/A"
               } `}</Grid>
               <Grid item>{`${
-                companyInfo.hasBeenLiquidated === true
+                companyData.hasBeenLiquidated === true
                   ? "Has Been Liquidated: YES"
                   : "Has Been Liquidated: N/A"
               } `}</Grid>
@@ -203,4 +203,4 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: any }) => {
   );
 };
 
-export default CompanyInfo;
+export default CompanyInformation;

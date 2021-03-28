@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
 }));
-const CompanySummary = ({ companyInfo }: { companyInfo: any }) => {
+const CompanySummary = ({ companyData }: { companyData: any }) => {
   const classes = useStyles();
   return (
     <Grid item xs={12} md={7}>
@@ -35,7 +35,7 @@ const CompanySummary = ({ companyInfo }: { companyInfo: any }) => {
           <Box fontWeight="fontWeightBold">Summary</Box>
         </MainTypography>
         <br></br>
-        <TextTypography align="justify">{companyInfo.summary}</TextTypography>
+        <TextTypography align="justify">{companyData.summary}</TextTypography>
       </Paper>
     </Grid>
   );

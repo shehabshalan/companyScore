@@ -35,12 +35,12 @@ const useStyles = makeStyles({
   },
 });
 
-const CompanyTeam = ({ companyInfo }: { companyInfo: any }) => {
+const CompanyTeam = ({ companyData }: { companyData: any }) => {
   // const [companyDirectors, setDirectors] = useState<any>([]);
-  // const [companyInfo, setCompany] = useState<any>(company);
-  const companyDirectors = companyInfo.directors;
-  const companyPSCS = companyInfo.pscs;
-  const companySics = companyInfo.sics;
+  // const [companyData, setCompany] = useState<any>(company);
+  const companyDirectors = companyData.directors;
+  const companyPSCS = companyData.pscs;
+  const companySics = companyData.sics;
   const classes = useStyles();
   return (
     <Box className={classes.companyFooter}>
@@ -223,7 +223,7 @@ const CompanyTeam = ({ companyInfo }: { companyInfo: any }) => {
               fontWeight: "lighter",
             }}
           >
-            * {companyInfo.disclaimer}
+            * {companyData.disclaimer}
           </Typography>
         </Box>
       </Container>

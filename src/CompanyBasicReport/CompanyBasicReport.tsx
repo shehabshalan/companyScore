@@ -1,11 +1,11 @@
 import React from "react";
 import CompanyReport from "./components/CompanyReport";
-import CompanyInfo from "./components/CompanyInfo";
+import CompanyInformation from "./components/CompanyInformation";
 import CompanyTeam from "./components/CompanyTeam";
 import CompanyTest from "./components/CompanyTest";
 import { useState, useEffect } from "react";
 import axios from "axios";
-const CompanyScore = () => {
+const CompanyBasicReport = () => {
   // const [companyInfo, setCompanyInfo] = useState([]);
   const [companyData, setCompanyData] = useState([]);
 
@@ -52,12 +52,11 @@ const CompanyScore = () => {
   // console.log(companyInfo);
   return (
     <div>
-      <CompanyInfo companyInfo={companyData} />
-      <CompanyReport companyInfo={companyData} />
-      {/* <CompanyTest companyInfo={companyData} /> */}
-      <CompanyTeam companyInfo={companyData} />
+      <CompanyInformation companyData={companyData} />
+      <CompanyReport companyData={companyData} />
+      <CompanyTeam companyData={companyData} />
     </div>
   );
 };
 
-export default CompanyScore;
+export default CompanyBasicReport;

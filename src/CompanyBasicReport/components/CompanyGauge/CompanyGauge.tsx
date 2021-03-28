@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
   },
 }));
-const CompanyGauge = ({ companyInfo }: { companyInfo: any }) => {
+const CompanyGauge = ({ companyData }: { companyData: any }) => {
   const classes = useStyles();
   const chartStyle = {
     maxHeight: 243,
@@ -55,7 +55,7 @@ const CompanyGauge = ({ companyInfo }: { companyInfo: any }) => {
               colors={["#EA4228", "#FFA500", "#F5CD19", "#5BE12C"]}
               hideText
               // 0.125, 0.375, 0.675, 0.875
-              percent={calcualteScore(companyInfo.percentage)}
+              percent={calcualteScore(companyData.percentage)}
               arcPadding={0.01}
             />
           </Box>

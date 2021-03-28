@@ -3,12 +3,12 @@ import { Grid, Container } from "@material-ui/core";
 import CompanyGauge from "../CompanyGauge";
 import CompanySummary from "../CompanySummary";
 
-const CompanyReport = ({ companyInfo }: { companyInfo: any }) => {
+const CompanyReport = ({ companyData }: { companyData: any }) => {
   return (
     <Container>
       <Grid container direction="row" spacing={5} justify="space-between">
-        <CompanySummary companyInfo={companyInfo} />
-        <CompanyGauge companyInfo={companyInfo} />
+        <CompanySummary companyData={companyData} />
+        <CompanyGauge companyData={companyData} />
       </Grid>
     </Container>
   );
