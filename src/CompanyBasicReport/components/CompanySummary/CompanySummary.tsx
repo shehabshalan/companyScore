@@ -7,6 +7,7 @@ import {
   withStyles,
   makeStyles,
 } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const MainTypography = withStyles({
   root: {
@@ -25,17 +26,45 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
     color: "black",
   },
+  summaryFont: {
+    color: "#26A69A",
+    fontWeight: "bold",
+  },
 }));
 const CompanySummary = ({ companyData }: { companyData: any }) => {
   const classes = useStyles();
   return (
     <Grid item xs={12} md={7}>
       <Paper className={classes.paper}>
-        <MainTypography variant="h5">
-          <Box fontWeight="fontWeightBold">Summary</Box>
-        </MainTypography>
-        <br></br>
-        <TextTypography align="justify">{companyData.summary}</TextTypography>
+        {companyData.summary ? (
+          <Box>
+            <Typography className={classes.summaryFont} variant="h5">
+              Summary
+            </Typography>
+
+            <br></br>
+            <TextTypography align="justify">
+              {companyData.summary}
+            </TextTypography>
+          </Box>
+        ) : (
+          <Box>
+            <Typography className={classes.summaryFont} variant="h5">
+              <Skeleton variant="rect" width={100} />
+            </Typography>
+
+            <br></br>
+            <TextTypography align="justify">
+              <Skeleton variant="text" />
+              <Skeleton variant="text" />
+              <Skeleton variant="text" />
+              <Skeleton variant="text" />
+              <Skeleton variant="text" />
+              <Skeleton variant="text" />
+              <Skeleton variant="text" />
+            </TextTypography>
+          </Box>
+        )}
       </Paper>
     </Grid>
   );

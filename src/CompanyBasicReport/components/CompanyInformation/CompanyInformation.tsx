@@ -7,6 +7,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import { makeStyles } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import Skeleton from "@material-ui/lab/Skeleton";
 // import CompanyTeam from "../CompanyTeam";
 const maxWidth = "35%";
 const top = "6%";
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
     marginBottom: 60,
     paddingTop: 40,
     paddingBottom: 40,
+    fontWeight: "bold",
   },
   companyName: {
     fontWeight: "bold",
@@ -67,13 +69,19 @@ const CompanyInformation = ({ companyData }: { companyData: any }) => {
       <Container>
         {/* COMPANY NAME --START */}
         <Box>
-          <Typography
-            className={classes.companyName}
-            variant="h2"
-            component="h1"
-          >
-            {companyData.companyName}
-          </Typography>
+          {companyData.companyName ? (
+            <Typography
+              className={classes.companyName}
+              variant="h2"
+              component="h1"
+            >
+              {companyData.companyName}
+            </Typography>
+          ) : (
+            <Typography variant="h2">
+              <Skeleton animation="wave" />
+            </Typography>
+          )}
         </Box>
 
         {/* COMPANY NAME --END */}
@@ -81,23 +89,43 @@ const CompanyInformation = ({ companyData }: { companyData: any }) => {
         {/* COMPANY TYPE AND STATUS --START */}
         <Box className={classes.companyTypeStatus}>
           <Grid container direction="row" justify="space-between">
-            <Grid item>
-              <Typography className={classes.companyType} variant="h6">
-                {companyData.type && `${companyData.type.toUpperCase()}`}
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              className={
-                companyData.status === "Active"
-                  ? classes.companyStatusActive
-                  : classes.companyStatusDis
-              }
-            >
-              <Typography style={{ fontWeight: "bolder", lineHeight: "30px" }}>
-                {companyData.status}
-              </Typography>
-            </Grid>
+            {companyData.type ? (
+              <Grid item>
+                <Typography className={classes.companyType} variant="h6">
+                  {companyData.type && `${companyData.type.toUpperCase()}`}
+                </Typography>
+              </Grid>
+            ) : (
+              <Grid item>
+                <Typography variant="h6">
+                  <Skeleton animation="wave" width={60} height={20} />
+                </Typography>
+              </Grid>
+            )}
+            {companyData.status ? (
+              <Grid
+                item
+                className={
+                  companyData.status === "Active"
+                    ? classes.companyStatusActive
+                    : classes.companyStatusDis
+                }
+              >
+                <Typography
+                  style={{ fontWeight: "bolder", lineHeight: "30px" }}
+                >
+                  {companyData.status}
+                </Typography>
+              </Grid>
+            ) : (
+              <Grid item>
+                <Typography
+                  style={{ fontWeight: "bolder", lineHeight: "30px" }}
+                >
+                  <Skeleton animation="wave" width={60} height={20} />
+                </Typography>
+              </Grid>
+            )}
           </Grid>
         </Box>
 
@@ -107,24 +135,54 @@ const CompanyInformation = ({ companyData }: { companyData: any }) => {
           <Grid container direction="row" justify="space-between" spacing={1}>
             {/* COMPANY INFORMATION --START */}
             <Grid item container direction="column" xs={12} md={6} spacing={2}>
-              <Grid item container direction="row" spacing={1}>
-                {" "}
-                <Grid item>
+              {companyData.companyNumber ? (
+                <Grid item container direction="row" spacing={1}>
                   {" "}
-                  <BusinessIcon />
+                  <Grid item>
+                    {" "}
+                    <BusinessIcon />
+                  </Grid>
+                  <Grid item>{companyData.companyNumber}</Grid>
                 </Grid>
-                <Grid item>{companyData.companyNumber}</Grid>
-              </Grid>
-              <Grid item container direction="row" spacing={1}>
-                {" "}
-                <Grid item>
+              ) : (
+                <Grid item container direction="row" spacing={1}>
                   {" "}
-                  <LocationOnIcon />
+                  <Grid item>
+                    {" "}
+                    <Skeleton
+                      animation="wave"
+                      variant="text"
+                      width={60}
+                      height={20}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid
-                  item
-                >{`${companyData.registeredOfficeAddress}, ${companyData.postalCode} `}</Grid>
-              </Grid>
+              )}
+              {companyData.registeredOfficeAddress ? (
+                <Grid item container direction="row" spacing={1}>
+                  {" "}
+                  <Grid item>
+                    {" "}
+                    <LocationOnIcon />
+                  </Grid>
+                  <Grid
+                    item
+                  >{`${companyData.registeredOfficeAddress}, ${companyData.postalCode} `}</Grid>
+                </Grid>
+              ) : (
+                <Grid item container direction="row" spacing={1}>
+                  {" "}
+                  <Grid item>
+                    <Skeleton
+                      animation="wave"
+                      variant="text"
+                      width={60}
+                      height={20}
+                    />
+                  </Grid>
+                </Grid>
+              )}
+              {/* {companyData.registeredIn ? () : ()} */}
               {companyData.registeredIn ? (
                 <Grid item container direction="row" spacing={1}>
                   {" "}
@@ -142,7 +200,7 @@ const CompanyInformation = ({ companyData }: { companyData: any }) => {
                   </Grid>
                   <Grid item>
                     <Typography
-                      style={{ fontWeight: "bolder", fontSize: "20px" }}
+                      style={{ fontWeight: "bolder", fontSize: "18px" }}
                     >
                       {companyData.registeredIn}
                     </Typography>
@@ -157,15 +215,23 @@ const CompanyInformation = ({ companyData }: { companyData: any }) => {
                   </Typography>
                 </Grid>
               )}
-
-              <Grid item container direction="row" spacing={1}>
-                {" "}
-                <Grid item>
+              {companyData.incorporatedOn ? (
+                <Grid item container direction="row" spacing={1}>
                   {" "}
-                  <DateRangeIcon />
+                  <Grid item>
+                    {" "}
+                    <DateRangeIcon />
+                  </Grid>
+                  <Grid item>{companyData.incorporatedOn}</Grid>
                 </Grid>
-                <Grid item>{companyData.incorporatedOn}</Grid>
-              </Grid>
+              ) : (
+                <Skeleton
+                  animation="wave"
+                  variant="text"
+                  width={60}
+                  height={20}
+                />
+              )}
             </Grid>
             {/* COMPANY INFORMATION --END */}
 

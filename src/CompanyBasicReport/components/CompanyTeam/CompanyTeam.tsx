@@ -1,40 +1,72 @@
 import { Grid, Box, Typography, Container, Paper } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
-import { useEffect } from "react";
-import { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
-import WorkIcon from "@material-ui/icons/Work";
-import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 import Divider from "@material-ui/core/Divider";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { CompareArrowsOutlined } from "@material-ui/icons";
 import Skeleton from "@material-ui/lab/Skeleton";
-import BusinessIcon from "@material-ui/icons/Business";
-const useStyles = makeStyles({
-  companyFooter: {
-    backgroundColor: "#9bbdba",
-    color: "#ffffff",
-    minHeight: 500,
-    marginTop: 60,
-    alignSelf: "stretch",
-  },
-  skeletonParent: {
-    marginTop: 20,
-  },
-  skeletonChild: {
-    marginTop: 20,
-    marginBottom: 20,
-    maxWidth: 300,
-  },
-});
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { grey } from "@material-ui/core/colors";
 
+import ReactCountryFlag from "react-country-flag";
+
+// const useStyles = makeStyles({
+//   companyFooter: {
+//     backgroundColor: "#9bbdba",
+//     color: "#ffffff",
+//     minHeight: 500,
+//     marginTop: 60,
+//     alignSelf: "stretch",
+//   },
+//   skeletonParent: {
+//     marginTop: 20,
+//   },
+//   skeletonChild: {
+//     marginTop: 20,
+//     marginBottom: 20,
+//     maxWidth: 300,
+//   },
+//   listFont: {
+//     color: "#ffffff",
+//   },
+// });
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      "& > *": {
+        margin: theme.spacing(1),
+      },
+    },
+    grey: {
+      color: theme.palette.getContrastText(grey[50]),
+      backgroundColor: grey[50],
+    },
+
+    companyFooter: {
+      backgroundColor: "#9bbdba",
+      color: "#ffffff",
+      minHeight: 500,
+      marginTop: 60,
+      alignSelf: "stretch",
+    },
+    skeletonParent: {
+      marginTop: 20,
+    },
+    skeletonChild: {
+      marginTop: 20,
+      marginBottom: 20,
+      maxWidth: 300,
+    },
+    listFont: {
+      color: "#ffffff",
+    },
+  })
+);
 const CompanyTeam = ({ companyData }: { companyData: any }) => {
   // const [companyDirectors, setDirectors] = useState<any>([]);
   // const [companyData, setCompany] = useState<any>(company);
@@ -70,6 +102,7 @@ const CompanyTeam = ({ companyData }: { companyData: any }) => {
                   spacing={3}
                   justify="space-between"
                 >
+                  {/*  LINE OF BUSINESS  */}
                   {companySics ? (
                     companySics.map((business: any) => {
                       return (
@@ -114,7 +147,7 @@ const CompanyTeam = ({ companyData }: { companyData: any }) => {
                 </Grid>
               </Container>
             </Grid>
-
+            {/* DIRECTORS */}
             <Grid item xs={12} lg={4}>
               <Box fontWeight="fontWeightBold" textAlign="center">
                 <Typography variant={"h5"}>Directors</Typography>
@@ -128,13 +161,25 @@ const CompanyTeam = ({ companyData }: { companyData: any }) => {
                           <List>
                             <ListItem>
                               <ListItemAvatar>
-                                <Avatar>
-                                  <AccountCircleRoundedIcon />
+                                <Avatar className={classes.grey}>
+                                  <AccountCircleRoundedIcon
+                                    style={{ color: "#104641" }}
+                                  />
                                 </Avatar>
                               </ListItemAvatar>
                               <ListItemText
                                 primary={director.name}
-                                secondary={director.countryOfResidence}
+                                secondary={
+                                  <ReactCountryFlag
+                                    countryCode={director.countryCode}
+                                    svg
+                                    style={{
+                                      width: "1.5em",
+                                      height: "1.5em",
+                                    }}
+                                    title={director.countryCode}
+                                  />
+                                }
                               />
                             </ListItem>
                             <Divider variant="inset" component="li" />
@@ -159,7 +204,7 @@ const CompanyTeam = ({ companyData }: { companyData: any }) => {
                 </Grid>
               </Container>
             </Grid>
-
+            {/* PERSONS WITH SIGNIFICANT CONTROL */}
             <Grid item xs={12} lg={4}>
               <Box fontWeight="fontWeightBold" textAlign="center">
                 <Typography variant={"h5"}>
@@ -175,13 +220,26 @@ const CompanyTeam = ({ companyData }: { companyData: any }) => {
                           <List>
                             <ListItem>
                               <ListItemAvatar>
-                                <Avatar>
-                                  <AccountCircleRoundedIcon />
+                                <Avatar className={classes.grey}>
+                                  <AccountCircleRoundedIcon
+                                    style={{ color: "#104641" }}
+                                  />
                                 </Avatar>
                               </ListItemAvatar>
                               <ListItemText
+                                className={classes.listFont}
                                 primary={pscs.name}
-                                secondary={pscs.countryOfResidence}
+                                secondary={
+                                  <ReactCountryFlag
+                                    countryCode={pscs.countryCode}
+                                    svg
+                                    style={{
+                                      width: "1.5em",
+                                      height: "1.5em",
+                                    }}
+                                    title={pscs.countryCode}
+                                  />
+                                }
                               />
                             </ListItem>
                             <Divider variant="inset" component="li" />
@@ -209,23 +267,43 @@ const CompanyTeam = ({ companyData }: { companyData: any }) => {
           </Grid>
         </Grid>
       </Container>
+      {/* DISCLAIMER */}
       <Container>
-        <Box
-          style={{
-            padding: 10,
-            marginTop: 50,
-          }}
-        >
-          <Typography
-            variant="body1"
+        {companyData.disclaimer ? (
+          <Box
             style={{
-              fontSize: 13,
-              fontWeight: "lighter",
+              padding: 10,
+              marginTop: 50,
             }}
           >
-            * {companyData.disclaimer}
-          </Typography>
-        </Box>
+            <Typography
+              variant="body1"
+              style={{
+                fontSize: 13,
+                fontWeight: "lighter",
+              }}
+            >
+              * {companyData.disclaimer}
+            </Typography>
+          </Box>
+        ) : (
+          <Box
+            style={{
+              padding: 10,
+              marginTop: 50,
+            }}
+          >
+            <Typography
+              variant="body1"
+              style={{
+                fontSize: 13,
+                fontWeight: "lighter",
+              }}
+            >
+              <Skeleton variant="text" />
+            </Typography>
+          </Box>
+        )}
       </Container>
     </Box>
   );
